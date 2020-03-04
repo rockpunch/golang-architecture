@@ -28,7 +28,14 @@ func NewPersonService(a Accessor) PersonService {
 func (ps PersonService) Get(n int) (Person, error) {
 	p := ps.a.Retrieve(n)
 	if p.First == "" {
-		return Person{}, fmt.Errorf("no Person with key %d\n", n)
+		return Person{}, fmt.Errorf("no Person with name %d\n", n)
 	}
 	return p, nil
+}
+
+func (ps PersonService) Put(n int, p Person) (Person, error) {
+	if p.First == "" {
+		return Person{}, fmt.Errorf("person must contain First value\n")
+	}
+	return ps.Put(n, p)
 }
