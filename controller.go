@@ -4,12 +4,14 @@ import (
 	"fmt"
 )
 
+// Person is how the architecture package stores a person
 type Person struct {
 	First string
 }
 
-// Accessor saying mongo and postgrs
-// being abstract types of itself.
+// Accessor is how to store or retrieve a person
+// When saving a person, if person does not have First value, return the zero value.
+// When retrieving a person, if they do not exist return the zero value.
 type Accessor interface {
 	Save(n int, p Person)
 	Retrieve(n int) Person
@@ -21,7 +23,7 @@ type PersonService struct {
 }
 
 func NewPersonService(a Accessor) PersonService {
-	return PersonService{a:a}
+	return PersonService{a: a}
 }
 
 // function for the get
