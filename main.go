@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+//this, we would say CONCRETE Type.
 type person struct {
 	first string
 }
@@ -11,7 +12,9 @@ func (p person) speak() {
 }
 
 //an interface says
-
+//this, we would say ABSTRACT Type.
+//THUS, when you have a value of an interface type...
+//you know NOTHING about WHAT IT IS, you know ONLY WHAT IT CAN DO.
 type human interface {
 	speak()
 }
