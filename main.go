@@ -28,6 +28,11 @@ type human interface {
 	speak()
 }
 
+//foo takes abstract type of human, hence will take person, secretAgent type.
+func foo (h human) {
+	h.speak()
+}
+
 func main() {
 	p1 := person{
 		first: "James",
@@ -51,4 +56,10 @@ func main() {
 
 	// sa has person. logically, it has to have two speak method. but what would happen?
 	h2.speak()
+
+	fmt.Println("---------------")
+	foo(h1)
+	foo(h2)
+	foo(p1)
+	foo(sa1)
 }
