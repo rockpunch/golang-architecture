@@ -32,13 +32,3 @@ func (ps PersonService) Get(n int) (Person, error) {
 	}
 	return p, nil
 }
-
-// utilizing Accessor as a param
-// hence you can simply swap out the actual
-// implementations at any point.
-func Put(a Accessor, n int, p Person) {
-	a.Save(n, p)
-}
-func Get(a Accessor, n int) Person {
-	return a.Retrieve(n)
-}
