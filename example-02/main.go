@@ -31,6 +31,20 @@ type accessor interface {
 	retrieve(n int) person
 }
 
+// an alternative way of implementing the service.
+type personService struct {
+	a accessor
+}
+
+// function for the get
+func (ps personService) get(n int) (person, error) {
+	p := ps.a.retrieve(n)
+	if p.first == "" {
+		return person{}, fmt.Errorf("no person with key %d\n", n)
+	}
+	return p, nil
+}
+
 // utilizing accessor as a param
 // hence you can simply swap out the actual
 // implementations at any point.
@@ -54,11 +68,16 @@ func main() {
 		first: "Graham",
 	}
 
+	ps := personService{a:dbm}
+
 	fmt.Printf("\nPrinting the dbm result\n\n")
 	put(dbm, 1, p1)
 	put(dbm, 2, p2)
 	fmt.Println(get(dbm, 1))
 	fmt.Println(get(dbm, 2))
+
+	fmt.Println(ps.get(1))
+	fmt.Println(ps.get(3))
 
 	fmt.Printf("\n-------------\n\n")
 
