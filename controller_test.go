@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/golang/mock/gomock"
 	"testing"
-
 )
 
 type Db map[int] Person
