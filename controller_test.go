@@ -1,6 +1,7 @@
 package architecture
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -20,11 +21,23 @@ func TestPut(t *testing.T) {
 	}
 	ps := PersonService{a:mdb}
 	ps.Put(1, p)
-	result, err := ps.Get(1)
-	if err != nil {
-		t.Fatalf("Failed due to: %v", err)
-	}
+	result := mdb.Retrieve(1)
+
 	if result != p {
 		t.Fatalf("Want %v, got %v", p, result)
 	}
+}
+
+// A testable example
+func ExamplePut() {
+	mdb := Db{}
+	p := Person {
+		First: "James",
+	}
+	ps := NewPersonService(mdb)
+
+	ps.Put(1, p)
+	got := mdb.Retrieve(1)
+	fmt.Println(got)
+	// Output: {James}
 }
