@@ -42,3 +42,11 @@ func (ps PersonService) Put(n int, p Person) error {
 	ps.a.Save(n, p)
 	return nil
 }
+
+func Put (a Accessor, n int, p Person) {
+	a.Save(n, p)
+}
+
+func Get (a Accessor, n int) Person {
+	return a.Retrieve(n)
+}
