@@ -28,7 +28,6 @@ func TestPut(t *testing.T) {
 	}
 }
 
-// A testable example
 func ExamplePut() {
 	mdb := Db{}
 	p := Person {
