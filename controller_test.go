@@ -26,7 +26,7 @@ func TestPut(t *testing.T) {
 
 	acc.EXPECT().Save(1, p).MinTimes(1).MaxTimes(1)
 
-	Put(acc, 2, p)
+	Put(acc, 1, p)
 
 	ctl.Finish()
 }
