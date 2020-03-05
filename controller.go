@@ -11,7 +11,7 @@ type Person struct {
 
 // Accessor is how to store or retrieve a person
 // When saving a person, if person does not have First value, return the zero value.
-// When retrieving a person, if they do not exist return the zero value.
+// When retrieving a person, if they do not exist return error.
 type Accessor interface {
 	Save(n int, p Person)
 	Retrieve(n int) Person
@@ -35,9 +35,10 @@ func (ps PersonService) Get(n int) (Person, error) {
 	return p, nil
 }
 
-func (ps PersonService) Put(n int, p Person) (Person, error) {
+func (ps PersonService) Put(n int, p Person) error {
 	if p.First == "" {
-		return Person{}, fmt.Errorf("person must contain First value\n")
+		return fmt.Errorf("person must contain First value\n")
 	}
-	return ps.Put(n, p)
+	ps.a.Save(n, p)
+	return nil
 }
